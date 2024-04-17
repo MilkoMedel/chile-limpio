@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <div class="title">Formulario de registro</div><br>
-        <form action="#" onsubmit="return validarFormulario();">
+        <form action="#">
             <div class="user-details">
                 <div class="input-box">
                     <span class="details">Rut</span>
@@ -73,10 +73,10 @@
                 </div>
             </div>
             <div class="button">
-                <input type="submit" value="registrar" onclick="generarAlerta();">
-                <p class="warnings" id="warnings"></p>
+                <input type="submit" value="registrar" onclick="enviarFormulario();">
             </div>
         </form>
+        <div id="error"></div>
     </div>
     <script src="JS/archivos.js"></script>
 </body>
