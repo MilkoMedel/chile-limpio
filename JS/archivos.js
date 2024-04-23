@@ -1,303 +1,225 @@
-// archivos.js
+var rut             = document.getElementById('rut');
+var paterno         = document.getElementById('paterno');
+var materno         = document.getElementById('materno');
+var nombre          = document.getElementById('nombre');
+var fechaNacimiento = document.getElementById('fecha');
+var edad            = document.getElementById('edad'); 
+var correo          = document.getElementById('correo');
+var profesion       = document.getElementById('profesion');
+var motivo          = document.getElementById('motivo');
+var generoRadios    = document.getElementsByName("genero");
+var generoSeleccionado;
 
-// Función para limpiar los datos del formulario
-function limpiarFormulario() {
-    document.getElementById('rut').value = '';
-    document.getElementById('nombre').value = '';
-    document.getElementById('paterno').value = '';
-    document.getElementById('materno').value = '';
-    document.getElementById('fecha').value = '';
-    document.getElementById('edad').value = '';
-    document.querySelector('input[name="gender"]:checked').checked = false;
-    document.getElementById('celular').value = '';
-    document.getElementById('profesion').value = '';
-    document.getElementById('motivo').value = '';
-    document.getElementById("email").value = '';
-}
-
-// Función para validar el rut
-function validarRut() {
-    var rutInput = document.getElementById('rut');
-    var rutValue = rutInput.value.trim().replace(/-/g, '').toUpperCase(); // Elimina guiones y convierte a mayúsculas
-    var regex = /^[0-9]+[K]?$/; // Expresión regular modificada
-
-    if (rutValue === "") {
-        rutInput.classList.add('error');
-        return false;
-    }
-
-    if (!regex.test(rutValue)) {
-        rutInput.classList.add('error');
-        return false;
-    } else {
-        rutInput.classList.remove('error');
-        return true;
+for (var i = 0; i < generoRadios.length; i++) {
+    if (generoRadios[i].checked) {
+        generoSeleccionado = generoRadios[i].value;
+        break;
     }
 }
 
-// Función para validar el apellido paterno
-function validarApellidoPaterno() {
-    var apellidoPaternoInput = document.getElementById('paterno');
-    var apellidoPaternoValue = apellidoPaternoInput.value.trim();
+document.addEventListener("DOMContentLoaded", function() {
+    var rut = document.getElementById('rut');
+    var paterno = document.getElementById('paterno');
+    var materno = document.getElementById('materno');
+    var nombre = document.getElementById('nombre');
+    var fechaNacimiento = document.getElementById('fecha');
+    var edad = document.getElementById('edad');
+    var correo = document.getElementById('correo');
+    var profesion = document.getElementById('profesion');
+    var motivo = document.getElementById('motivo');
+    var generoRadios = document.getElementsByName("genero");
+    var generoSeleccionado;
 
-    if (apellidoPaternoValue.length < 3 || apellidoPaternoValue.length > 20) {
-        apellidoPaternoInput.classList.add('error');
-        return false;
-    } else {
-        apellidoPaternoInput.classList.remove('error');
-        return true;
-    }
-}
-
-// Función para validar el apellido materno
-function validarApellidoMaterno() {
-    var apellidoMaternoInput = document.getElementById('materno');
-    var apellidoMaternoValue = apellidoMaternoInput.value.trim();
-
-    if (apellidoMaternoValue.length < 3 || apellidoMaternoValue.length > 20) {
-        apellidoMaternoInput.classList.add('error');
-        return false;
-    } else {
-        apellidoMaternoInput.classList.remove('error');
-        return true;
-    }
-}
-
-// Función para validar el nombre
-function validarNombre() {
-    var nombreInput = document.getElementById('nombre');
-    var nombreValue = nombreInput.value.trim();
-
-    if (nombreValue.length < 3 || nombreValue.length > 20) {
-        nombreInput.classList.add('error');
-        return false;
-    } else {
-        nombreInput.classList.remove('error');
-        return true;
-    }
-}
-
-// Función para validar la fecha
-function validarFecha() {
-    var fechaInput = document.getElementById('fecha');
-    var fechaValue = fechaInput.value.trim();
-
-    if (fechaValue === "") {
-        fechaInput.classList.add('error');
-        return false;
-    } else {
-        fechaInput.classList.remove('error');
-        return true;
-    }
-}
-
-// Función para validar la edad entre  18 y 40 años
-function validarEdad() {
-    var edadInput = document.getElementById('edad');
-    var edadValue = parseInt(edadInput.value);
-
-    if (isNaN(edadValue) || edadValue < 18 || edadValue > 40) {
-        edadInput.classList.add('error');
-        return false;
-    } else {
-        edadInput.classList.remove('error');
-        return true;
-    }
-}
-
-// Funcion para validar el email 
-function validarEmail() {
-    var emailInput = document.getElementById('email');
-    var emailValue = emailInput.value.trim();
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(emailValue)) {
-        emailInput.classList.add('error');
-        return false;
-    } else {
-        emailInput.classList.remove('error');
-        return true;
-    }
-}
-
-// Funcion para validar el limite de caracteres en celular
-function validarCelular() {
-    var celularInput = document.getElementById('celular');
-    var celularValue = celularInput.value.trim();
-
-    if (celularValue.length < 9 || celularValue.length > 12 || isNaN(celularValue)) {
-        celularInput.classList.add('error');
-        return false;
-    } else {
-        celularInput.classList.remove('error');
-        return true;
-    }
-}
-
-// funcion para validar que los campos no esten vacios
-function validarProfesion() {
-    var profesionInput = document.getElementById('profesion');
-    var profesionValue = profesionInput.value.trim();
-
-    if (profesionValue === "") {
-        profesionInput.classList.add('error');
-        return false;
-    } else {
-        profesionInput.classList.remove('error');
-        return true;
-    }
-}
-
-// funcion para validar que los campos no esten vacios
-function validarMotivo() {
-    var motivoInput = document.getElementById('motivo');
-    var motivoValue = motivoInput.value.trim();
-
-    if (motivoValue === "") {
-        motivoInput.classList.add('error');
-        return false;
-    } else {
-        motivoInput.classList.remove('error');
-        return true;
-    }
-}
-
-function validarFormulario() {
-    var esValido = true;
-
-    if (!validarRut()) {
-        esValido = false;
-    }
-    if (!validarNombre()) {
-        esValido = false;
-    }
-    if (!validarApellidoPaterno()) {
-        esValido = false;
-    }
-    if (!validarApellidoMaterno()) {
-        esValido = false;
-    }
-    if (!validarEdad()) {
-        esValido = false;
-    }
-    if (!validarGenero()) {
-        esValido = false;
-    }
-    if (!validarCelular()) {
-        esValido = false;
-    }
-    if (!validarEmail()) {
-        esValido = false;
-    }
-    if (!validarProfesion()) {
-        esValido = false;
-    }
-    if (!validarMotivo()) {
-        esValido = false;
-    }
-
-    return esValido;
-}
-
-
-// Función para generar la carta de presentación
-function generarAlerta() {
-    var rut = document.getElementById('rut').value;
-    var apellidoPaterno = document.getElementById('paterno').value;
-    var apellidoMaterno = document.getElementById('materno').value;
-    var nombre = document.getElementById('nombre').value;
-    var fecha = document.getElementById('fecha' ).value;
-    var edad = document.getElementById('edad').value;
-    var email = document.getElementById('email').value;
-    var celular = document.getElementById('celular').value;
-    var profesion = document.getElementById('profesion').value;
-    var motivo = document.getElementById('motivo').value;
-    var generoInputs = document.querySelectorAll('input[name="gender"]');
-    var generoText = '';
-
-    generoInputs.forEach(function(input) {
-        if (input.checked) {
-            if (input.id === 'dot-1') {
-                generoText = 'Hombre';
-            } else if (input.id === 'dot-2') {
-                generoText = 'Mujer';
-            } else if (input.id === 'dot-3') {
-                generoText = 'Otro';
-            }
+    for (var i = 0; i < generoRadios.length; i++) {
+        if (generoRadios[i].checked) {
+            generoSeleccionado = generoRadios[i].value;
+            break;
         }
+    }
+    var form = document.getElementById('form');
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Evita que el formulario se envíe
+
+        // Obtener los valores de los campos del formulario
+        var rutValue = rut.value;
+        var paternoValue = paterno.value;
+        var maternoValue = materno.value;
+        var nombreValue = nombre.value;
+        var fechaValue = fechaNacimiento.value;
+        var edadValue = edad.value;
+        var correoValue = correo.value;
+        var profesionValue = profesion.value;
+        var motivoValue = motivo.value;
+
+        // Crear el texto con los datos del usuario
+        var datosUsuarioTexto = "Rut: " + rutValue + "\n" +
+            "Apellido Paterno: " + paternoValue + "\n" +
+            "Apellido Materno: " + maternoValue + "\n" +
+            "Nombres: " + nombreValue + "\n" +
+            "Fecha de nacimiento: " + fechaValue + "\n" +
+            "Edad: " + edadValue + "\n" +
+            "Correo: " + correoValue + "\n" +
+            "Profesión: " + profesionValue + "\n" +
+            "Motivo de postulación: " + motivoValue;
+
+        // Mostrar los datos del usuario en el textarea
+        var datosUsuarioTextarea = document.getElementById('carta');
+        datosUsuarioTextarea.textContent = datosUsuarioTexto;
     });
+});
 
-    if (!rut) {
-        alert("Por favor, ingrese un Rut.");
-        return;
-    }
-    else if (!paterno) {
-        alert("Por favor, ingrese su apellido paterno.");
-        return;
-    }
-    else if (!materno) {
-        alert("Por favor, ingrese su apellido materno.");
-        return;
-    }else if (!nombre) {
-        alert("Por favor, ingrese su nombre.");
-        return;
-    }else if (!fecha) {
-        alert("Por favor, ingrese su fecha de nacimiento.");
-        return;
-    }else if (!edad) {
-        if(edad<18 || edad>40)
-            alert("debe tener entre 18 y 40 de edad")
-        else
-            alert("Por favor, ingrese su edad.");
-        return;
-    }else if (!email) {
-        alert("Por favor, ingrese su email.");
-        return;
-    }else if (!celular) {
-        alert("Por favor, ingrese su celular o telefono.");
-        return;
-    }else if (!profesion) {
-        alert("Por favor, ingrese su profesion.");
-        return;
-    }else if (!motivo) {
-        alert("Por favor, ingrese su motivo para optar a este trabajo.");
-        return;
-    }else if (!generoText) {
-        alert("Por favor, seleccione un Género.");
-        return;
-    }
-
-    var mensaje = "Datos del formulario:\n\n";
-    mensaje += "Rut: " + rut + "\n";
-    mensaje += "Nombre: " + nombre + "\n";
-    mensaje += "Apellido Paterno: " + apellidoPaterno + "\n";
-    mensaje += "Apellido Materno: " + apellidoMaterno + "\n";
-    mensaje += "Edad: " + edad + "\n";
-    mensaje += "Género: " + generoText + "\n";
-    mensaje += "Celular: " + celular + "\n";
-    mensaje += "Profesión: " + profesion + "\n";
-    mensaje += "Motivo de postulación: " + motivo + "\n";
-
-    alert(mensaje);
-    limpiarFormulario();
+function validarRut(rutCompleto) {
+    return /^[0-9]+-[0-9kK]{0,1}$/.test(rutCompleto);
 }
 
-
-
-
-
-
-// Adjunta el evento submit al formulario
-document.querySelector('form').addEventListener('submit', function(event) {
-    // Previene el envío automático del formulario
-    event.preventDefault();
-    
-    // Validar el formulario
-    if (validarFormulario()) {
-        // Si el formulario es válido, generar la alerta
-        generarAlerta();
-    } else {
-        // Si el formulario no es válido, no hacer nada
+function validarApellidoPaterno(apellido) {
+    if (apellido.length < 3 || apellido.length > 20) {
         return false;
+    }
+    return true;
+}
+
+function validarApellidoMaterno(apellido) {
+    if (apellido.length < 3 || apellido.length > 20) {
+        return false;
+    }
+    return true;
+}
+
+function validarNombre(nombre) {
+    if (nombre.length < 3 || nombre.length > 20) {
+        return false;
+    }
+    return true;
+}
+
+function validarFechaNacimiento(fechaNacimiento) {
+    var regexFecha = /^(\d{2})-(\d{2})-(\d{4})$/;
+    if (!regexFecha.test(fechaNacimiento)) {
+        return false;
+    }
+    return true;
+}
+
+function validarEdad(edad) {
+    return edad >= 18 && edad <= 35;
+}
+
+function validarCorreo(correo) {
+    var regexCorreo = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return regexCorreo.test(correo);
+}
+
+function validarCelular(celular) {
+    if (celular.length < 9 || celular.length > 11) {
+        return false;
+    }
+    return true;
+}
+
+function mostrarCarta(genero) {
+    var carta = document.getElementById("carta");
+    carta.style.display = "block";
+    if (carta) {
+        carta.textContent = "Género: " + genero + "\n" +
+            "Nombre: " + nombre.value + "\n" +
+            "Apellidos: " + paterno.value + " " + materno.value + "\n" +
+            "Fecha de nacimiento: " + fecha.value + "\n" +
+            "Edad: " + edad.value + "\n" +
+            "Correo: " + correo.value + "\n" +
+            "Profesión: " + profesion.value + "\n" +
+            "Motivo de postulación: " + motivo.value;
+    }
+}
+
+document.getElementById("rut").addEventListener("input", function(evt) {
+    let rut = this.value;
+    // valida el rut aqui
+    if (!validarRut(rut)) {
+        this.setCustomValidity("Formato de RUT incorrecto. Debe ser xxxxxxxx-x sin puntos");
+    } else {
+        this.setCustomValidity(""); // Borra el mensaje de error si el dato es válido
+    }
+});
+
+// Validar mientras se ingresa el apellido paterno
+document.getElementById("paterno").addEventListener("input", function(evt) {
+    let paterno = this.value;
+    // Validar apellido paterno aquí
+    if(!validarApellidoPaterno(paterno)){
+        this.setCustomValidity('Ingrese un apellido entre 3 y 20 caracteres');
+    } else {
+        this.setCustomValidity(""); // Borra el mensaje de error si el dato es válido
+    }
+});
+
+// Validar mientras se ingresa el apellido materno
+document.getElementById("materno").addEventListener("input", function(evt) {
+    let materno = this.value;
+    // Validar apellido materno aquí
+    if(!validarApellidoMaterno(materno)){
+        this.setCustomValidity('Ingrese un apellido entre 3 y 20 caracteres');
+    } else {
+        this.setCustomValidity(""); // Borra el mensaje de error si el dato es válido
+    }
+});
+
+// Validar mientras se ingresa el nombre
+document.getElementById("nombre").addEventListener("input", function(evt) {
+    let nombre = this.value;
+    // Validar nombre aquí
+    if(!validarNombre(nombre)){
+        this.setCustomValidity('El nombre debe ser entre 3 y 20 caracteres');
+    } else {
+        this.setCustomValidity(""); // Borra el mensaje de error si el dato es válido
+    }
+});
+
+// Validar mientras se ingresa la fecha de nacimiento
+document.getElementById("fecha").addEventListener("input", function(evt) {
+    let fechaNacimiento = this.value;
+    // Ajustar el formato del valor de fecha
+    let partesFecha = fechaNacimiento.split("-");
+    fechaNacimiento = partesFecha[2] + "-" + partesFecha[1] + "-" + partesFecha[0];
+    // Validar fecha de nacimiento aquí
+    if (!validarFechaNacimiento(fechaNacimiento)) {
+        this.setCustomValidity('La fecha de nacimiento no es válida');
+    } else {
+        this.setCustomValidity(""); // Borra el mensaje de error si el dato es válido
+    }
+});
+
+// validar mientras se ingresa la edad
+document.getElementById("edad").addEventListener("input", function(evt){
+    let edad = parseInt(this.value); // Convertir el valor a un número entero
+    // validar edad aqui
+    if(isNaN(edad) || edad <  18 || edad > 35){
+        document.getElementById("La edad debe ser entre 18 y 35 años");
+    }else{ 
+        this.setCustomValidity(""); // Borra el mensaje de error si el dato es válido
+    }
+});
+
+
+// Validar mientras se ingresa el correo electrónico
+document.getElementById("correo").addEventListener("input", function(evt) {
+    let correo = this.value;
+    // Validar correo electrónico aquí
+    if(!validarCorreo(correo)){
+        this.setCustomValidity('El correo no es válido');
+    } else {
+        this.setCustomValidity(""); // Borra el mensaje de error si el dato es válido
+    }
+});
+
+// Validar mientras se ingresa el número de celular
+document.getElementById("celular").addEventListener("input", function(evt) {
+    let celular = this.value;
+    // Validar número de celular aquí
+    if (!validarCelular(celular)) {
+        this.setCustomValidity('El teléfono debe tener al menos 9 y 10 dígitos');
+    } else {
+        this.setCustomValidity(""); // Borra el mensaje de error si el dato es válido
     }
 });

@@ -9,11 +9,11 @@
 <body>
     <div class="container">
         <div class="title">Formulario de registro</div><br>
-        <form action="#" onsubmit="return validarFormulario();">
+        <form action="#" id="form">
             <div class="user-details">
                 <div class="input-box">
-                    <span class="details">Rut</span>
-                    <input type="number" id="rut" placeholder="1234567890" required>
+                    <span class="details" >Rut</span>
+                    <input type="text" id="rut" maxlength="10"  placeholder="xxxxxxxx-x (sin puntos)" required >
                 </div>
                 <div class="input-box">
                     <span class="details">Apellido Paterno</span>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="input-box">
                     <span class="details">Email</span>
-                    <input type="text" id="email" placeholder="jvilchez@duocuc.cl" required>
+                    <input type="email" id="correo" placeholder="jvilchez@duocuc.cl" required>
                 </div>
                 <div class="input-box">
                     <span class="details">Celular / Telefono</span>
@@ -55,7 +55,7 @@
             <div class="gender-details">
                 <input type="radio" name="gender" id="dot-1">
                 <input type="radio" name="gender" id="dot-2">
-                <input type="radio" name="gender" id="dot-3">
+                <input type="radio" name="gender" id="dot-3" checked>
                 <span class="details-title">Género</span>
                 <div class="category">
                     <label for="dot-1">
@@ -73,8 +73,11 @@
                 </div>
             </div>
             <div class="button">
-                <input type="submit" value="registrar" onclick="generarAlerta();">
-                <p class="warnings" id="warnings"></p>
+                <input type="submit" value="registrar">
+            </div>
+            <div class="details-textarea">
+                <p id="carta">
+                </p>
             </div>
         </form>
     </div>
