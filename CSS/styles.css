@@ -120,17 +120,12 @@ form .button input:hover{
     position: relative;
 }
 
-.warnings {
-    position: absolute;
-    top: calc(100% + 10px); /* Ajusta el valor según sea necesario */
-    left: 0;
-    width: 100%;
-    display: none;
+.carta{
+    display: block;
+    width: auto;
+    height: auto;
 }
 
-.carta {
-    display: block !important; /* Para anular el display: none del textarea */
-}
 @media(max-width: 584px){
     .container{
         max-width: 100%;
